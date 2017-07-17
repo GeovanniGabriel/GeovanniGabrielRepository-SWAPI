@@ -15,14 +15,13 @@ import com.geovanni.starwars.app.Views.Adapters.Base.ViewHolderItem;
 public class MenuViewHolder extends ViewHolderItem<MenuItem> implements View.OnClickListener {
 
     private TextView nameTextView;
-    private TextView detailTextView;
 
     public MenuViewHolder(View itemView, IItemListener callback) {
         super(itemView);
 
         adapterCallback = callback;
         nameTextView = (TextView) itemView.findViewById(R.id.textview_name);
-        detailTextView = (TextView) itemView.findViewById(R.id.textview_detail);
+
         itemView.setOnClickListener(this);
     }
 
@@ -36,8 +35,6 @@ public class MenuViewHolder extends ViewHolderItem<MenuItem> implements View.OnC
     @Override
     public void bindItem(MenuItem item) {
         super.bindItem(item);
-
         nameTextView.setText(item.getName());
-
     }
 }

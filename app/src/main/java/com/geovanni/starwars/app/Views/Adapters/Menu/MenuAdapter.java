@@ -39,7 +39,7 @@ public class MenuAdapter extends RecyclerView.Adapter<ViewHolderItem> {
 
     @Override
     public int getItemCount() {
-        return menuItems.size() + 1;
+        return menuItems.size();
     }
 
     public void replaceData(List<MenuItem> menuItems) {

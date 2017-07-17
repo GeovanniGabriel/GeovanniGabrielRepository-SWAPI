@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/process"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent51"
+    android:visibility="visible">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:background="@drawable/bg_loading_white">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/background_dialogs"
+            android:gravity="center"
+            android:paddingBottom="@dimen/paddin_loader_height"
+            android:paddingLeft="@dimen/paddin_loader_widht"
+            android:paddingRight="@dimen/paddin_loader_widht"
+            android:paddingTop="@dimen/margin_small">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:theme="@style/ProgressLoader" />
+
+            <com.innocean.mykia.Views.CustomViews.StyleTextView
+                android:id="@+id/txtMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/progressBar"
+                android:layout_gravity="bottom|center_horizontal"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_regular"
+                android:gravity="center"
+                android:text="Cargando..."
+                android:textColor="@color/slate_grey_two"
+                android:visibility="visible" />
+
+        </RelativeLayout>
+
+    </FrameLayout>
+
+</LinearLayout>

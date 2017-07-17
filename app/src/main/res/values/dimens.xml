@@ -5,7 +5,13 @@
     <dimen name="dimen_16">16dp</dimen>
     <dimen name="textsize_12">12sp</dimen>
     <dimen name="textsize_14">14sp</dimen>
+    <dimen name="textsize_16">16sp</dimen>
     <dimen name="dimen_10">10dp</dimen>
     <dimen name="menu_row_height">15dp</dimen>
+    <dimen name="margin_regular">30dp</dimen>
+
+    <dimen name="margin_small">6dp</dimen>
+    <dimen name="paddin_loader_height">15dp</dimen>
+    <dimen name="paddin_loader_widht">20dp</dimen>
 
 </resources>

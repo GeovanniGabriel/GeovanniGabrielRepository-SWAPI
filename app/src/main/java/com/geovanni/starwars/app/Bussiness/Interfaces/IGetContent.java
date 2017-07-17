@@ -1,7 +1,7 @@
 package com.geovanni.starwars.app.Bussiness.Interfaces;
 
 /**
- * Created by gabri on 16/07/2017.
+ * Created by gabri on 17/07/2017.
  */
 
 public interface IGetContent<T> {
@@ -14,4 +14,3 @@ public interface IGetContent<T> {
 
     void showContent(T content);
 }
-
