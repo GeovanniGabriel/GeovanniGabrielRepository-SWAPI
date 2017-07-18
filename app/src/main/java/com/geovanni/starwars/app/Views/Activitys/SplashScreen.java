@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 
 import com.geovanni.starwars.app.Bussiness.Utils.NavigationUtil;
 import com.geovanni.starwars.app.R;
+import com.geovanni.starwars.app.StarWarsApp;
 
 /**
  * Created by gabri on 16/07/2017.

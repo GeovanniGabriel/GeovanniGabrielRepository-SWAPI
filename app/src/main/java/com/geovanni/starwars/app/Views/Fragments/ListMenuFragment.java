@@ -10,6 +10,7 @@ import com.geovanni.starwars.app.Bussiness.Interfaces.IGetContent;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IChangeFragments;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IItemListener;
 import com.geovanni.starwars.app.Bussiness.Model.MenuItem;
+import com.geovanni.starwars.app.Bussiness.Presenters.RootPresenter;
 import com.geovanni.starwars.app.R;
 import com.geovanni.starwars.app.Views.Adapters.Menu.MenuAdapter;
 import com.geovanni.starwars.app.Views.Base.BaseFragment;
@@ -29,6 +30,7 @@ public class ListMenuFragment extends BaseFragment implements IItemListener, IGe
     private List<MenuItem> menuItems;
     private IChangeFragments changeFragments;
     private View rootview;
+    private RootPresenter rootPresenter;
 
     @BindView(R.id.recycler_menu)
     RecyclerView menuRecyclerView;
@@ -45,6 +47,7 @@ public class ListMenuFragment extends BaseFragment implements IItemListener, IGe
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        rootPresenter = new RootPresenter(getCurrentContext(), this);
         menuAdapter = new MenuAdapter(this);
         menuItems = new ArrayList<>();
     }
@@ -53,8 +56,12 @@ public class ListMenuFragment extends BaseFragment implements IItemListener, IGe
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupMenuRecyclerView();
-        menuItems = loadMenuItems();
-        menuAdapter.replaceData(menuItems);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        rootPresenter.getRoots();
     }
 
     @Override
@@ -88,12 +95,14 @@ public class ListMenuFragment extends BaseFragment implements IItemListener, IGe
 
     @Override
     public void showError(Throwable throwable) {
-
+        String g = "";
     }
 
     @Override
     public void showContent(Object content) {
-
+        String g = "";
+        // menuItems = loadMenuItems();
+        // menuAdapter.replaceData(menuItems);
     }
 
     @Override
