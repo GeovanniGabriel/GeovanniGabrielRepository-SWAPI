@@ -29,7 +29,12 @@ public class MenuAdapter extends RecyclerView.Adapter<ViewHolderItem> {
     @Override
     public ViewHolderItem onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        return new MenuViewHolder(layoutInflater.inflate(R.layout.item_menu_detail, parent, false), itemListener);
+
+        if (viewType == MenuItem.HEADER) {
+            return new MenuHeaderViewHolder(layoutInflater.inflate(R.layout.header_menu_layout, parent, false));
+        } else {
+            return new MenuViewHolder(layoutInflater.inflate(R.layout.item_menu_detail, parent, false), itemListener);
+        }
     }
 
     @Override
@@ -40,6 +45,15 @@ public class MenuAdapter extends RecyclerView.Adapter<ViewHolderItem> {
     @Override
     public int getItemCount() {
         return menuItems.size();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0) {
+            return MenuItem.HEADER;
+        } else {
+            return MenuItem.SIMPLE_MENU;
+        }
     }
 
     public void replaceData(List<MenuItem> menuItems) {

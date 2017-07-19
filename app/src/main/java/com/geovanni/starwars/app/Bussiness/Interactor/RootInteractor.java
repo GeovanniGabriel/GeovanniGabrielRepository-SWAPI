@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.geovanni.starwars.app.Bussiness.Constants.Constants;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IWSRequestResult;
+import com.geovanni.starwars.app.Bussiness.Model.RootResponse;
 import com.geovanni.starwars.app.Bussiness.Utils.Enums;
 import com.geovanni.starwars.app.Bussiness.WSCaller.WebServicesFacade;
 
@@ -26,6 +27,6 @@ public class RootInteractor {
 
     public void getRoots() {
         WebServicesFacade webServicesFacade = new WebServicesFacade(context);
-        webServicesFacade.consumeWS(Enums.METHOD_GET, Constants.URL_BASE, headers, this.requestResult);
+        webServicesFacade.consumeWS(Enums.METHOD_GET, Constants.URL_BASE, headers, this.requestResult, RootResponse.class);
     }
 }

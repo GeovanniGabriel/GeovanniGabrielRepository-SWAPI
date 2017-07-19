@@ -7,9 +7,12 @@
     <dimen name="textsize_14">14sp</dimen>
     <dimen name="textsize_16">16sp</dimen>
     <dimen name="dimen_10">10dp</dimen>
+    <dimen name="textsize_20">20sp</dimen>
     <dimen name="menu_row_height">15dp</dimen>
     <dimen name="margin_regular">30dp</dimen>
-
+    <dimen name="logo_header_height">60dp</dimen>
+    <dimen name="margin_doble">25dp</dimen>
+    <dimen name="header_height">100dp</dimen>
     <dimen name="margin_small">6dp</dimen>
     <dimen name="paddin_loader_height">15dp</dimen>
     <dimen name="paddin_loader_widht">20dp</dimen>

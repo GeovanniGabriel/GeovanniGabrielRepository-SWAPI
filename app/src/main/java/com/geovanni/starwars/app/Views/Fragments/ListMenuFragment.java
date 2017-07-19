@@ -10,7 +10,10 @@ import com.geovanni.starwars.app.Bussiness.Interfaces.IGetContent;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IChangeFragments;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IItemListener;
 import com.geovanni.starwars.app.Bussiness.Model.MenuItem;
+import com.geovanni.starwars.app.Bussiness.Model.RootResponse;
 import com.geovanni.starwars.app.Bussiness.Presenters.RootPresenter;
+import com.geovanni.starwars.app.Bussiness.Utils.Alerts;
+import com.geovanni.starwars.app.Bussiness.WSCaller.DataSourceResult;
 import com.geovanni.starwars.app.R;
 import com.geovanni.starwars.app.Views.Adapters.Menu.MenuAdapter;
 import com.geovanni.starwars.app.Views.Base.BaseFragment;
@@ -95,14 +98,15 @@ public class ListMenuFragment extends BaseFragment implements IItemListener, IGe
 
     @Override
     public void showError(Throwable throwable) {
-        String g = "";
+        Alerts.showAlertMessage(getCurrentContext(), throwable.getMessage());
     }
 
     @Override
     public void showContent(Object content) {
-        String g = "";
-        // menuItems = loadMenuItems();
-        // menuAdapter.replaceData(menuItems);
+        DataSourceResult response = (DataSourceResult) content;
+        RootResponse rootData = (RootResponse) response.getData();
+        menuItems = loadMenuItems(rootData);
+        menuAdapter.replaceData(menuItems);
     }
 
     @Override
@@ -110,22 +114,73 @@ public class ListMenuFragment extends BaseFragment implements IItemListener, IGe
 
     }
 
-    private List<MenuItem> loadMenuItems() {
+    private List<MenuItem> loadMenuItems(final RootResponse data) {
+
         List<MenuItem> menuItems = new ArrayList<>();
 
         menuItems.add(new MenuItem() {
             {
-                setName("Uno");
-                setDetail("Uno");
+                setName("Header");
+                setType(MenuItem.HEADER);
             }
         });
 
-        menuItems.add(new MenuItem() {
-            {
-                setName("dos");
-                setDetail("dos");
+        if (data != null) {
+            if (data.getPeople() != null) {
+                menuItems.add(new MenuItem() {
+                    {
+                        setName("People");
+                        setDetail(data.getPeople());
+                        setType(MenuItem.SIMPLE_MENU);
+                    }
+                });
             }
-        });
+            if (data.getPlanets() != null) {
+                menuItems.add(new MenuItem() {
+                    {
+                        setName("Planets");
+                        setDetail(data.getPlanets());
+                        setType(MenuItem.SIMPLE_MENU);
+                    }
+                });
+            }
+            if (data.getFilms() != null) {
+                menuItems.add(new MenuItem() {
+                    {
+                        setName("Films");
+                        setDetail(data.getFilms());
+                        setType(MenuItem.SIMPLE_MENU);
+                    }
+                });
+            }
+            if (data.getSpecies() != null) {
+                menuItems.add(new MenuItem() {
+                    {
+                        setName("Species");
+                        setDetail(data.getSpecies());
+                        setType(MenuItem.SIMPLE_MENU);
+                    }
+                });
+            }
+            if (data.getVehicles() != null) {
+                menuItems.add(new MenuItem() {
+                    {
+                        setName("People");
+                        setDetail(data.getVehicles());
+                        setType(MenuItem.SIMPLE_MENU);
+                    }
+                });
+            }
+            if (data.getStarships() != null) {
+                menuItems.add(new MenuItem() {
+                    {
+                        setName("Starships");
+                        setDetail(data.getStarships());
+                        setType(MenuItem.SIMPLE_MENU);
+                    }
+                });
+            }
+        }
 
         return menuItems;
     }

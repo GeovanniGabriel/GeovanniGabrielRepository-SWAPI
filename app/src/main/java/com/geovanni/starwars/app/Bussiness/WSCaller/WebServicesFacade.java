@@ -12,6 +12,7 @@ import com.geovanni.starwars.app.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 
 /**
@@ -27,23 +28,23 @@ public class WebServicesFacade {
         this.context = context;
     }
 
-    public void consumeWS(Enums method, String urlService, HashMap<String, Object> params, IWSRequestResult requestResult) {
+    public void consumeWS(Enums method, String urlService, HashMap<String, Object> params, IWSRequestResult requestResult, Type responseType) {
         if (NetworkConnection.isOnline()) {
             WSCaller wsCaller = new WSCaller();
-            wsCaller.doRequestWS(createRequest(method, urlService, params, requestResult));
+            wsCaller.doRequestWS(createRequest(method, urlService, params, requestResult, responseType));
         } else {
             requestResult.onFailed(new Exception(context != null ? context.getString(R.string.error_internet) : connectionError));
         }
     }
 
-    private WsRequest createRequest(Enums method, String urlService, HashMap<String, Object> params, IWSRequestResult requestResult) {
+    private WsRequest createRequest(Enums method, String urlService, HashMap<String, Object> params, IWSRequestResult requestResult, Type responseType) {
 
         WsRequest request = new WsRequest();
         request.setMethod(getMethodType(method));
         request.set_url_request(urlService);
         request.setBody(params == null ? null : createParams(params));
         request.setRequestResult(requestResult);
-
+        request.setTypeResponse(responseType);
         request.setTimeOut(15000);
 
         return request;

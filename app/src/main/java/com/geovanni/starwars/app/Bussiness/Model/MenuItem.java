@@ -5,8 +5,13 @@ package com.geovanni.starwars.app.Bussiness.Model;
  */
 
 public class MenuItem {
+
+    public static final int HEADER = 0;
+    public static final int SIMPLE_MENU = 1;
+
     private String name;
     private String detail;
+    private int type;
 
     public MenuItem() {
     }
@@ -25,6 +30,14 @@ public class MenuItem {
 
     public void setDetail(String detail) {
         this.detail = detail;
+    }
+
+    public int getType() {
+        return type;
+    }
+
+    public void setType(int type) {
+        this.type = type;
     }
 
 }

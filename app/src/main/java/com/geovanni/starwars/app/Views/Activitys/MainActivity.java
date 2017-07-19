@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.widget.RelativeLayout;
 
 import com.geovanni.starwars.app.Bussiness.Interfaces.IChangeFragments;

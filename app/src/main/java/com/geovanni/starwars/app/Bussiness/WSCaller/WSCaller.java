@@ -9,6 +9,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.geovanni.starwars.app.Bussiness.Model.WsRequest;
+import com.geovanni.starwars.app.Bussiness.Utils.JsonManager;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -27,18 +28,11 @@ public class WSCaller {
 
     private final String TAG = this.getClass().getName();
 
-    /**
-     * Método para realizar la petición http segun los
-     * datos de la petición pasada como parámetro.
-     *
-     * @param request {@link WsRequest}
-     */
-
     public void doRequestWS(final WsRequest request) {
 
         VolleySingleton volleySingleton = VolleySingleton.getInstance(getContext());
 
-        JsonObjectRequest jsonRequest = new JsonObjectRequest(
+        final JsonObjectRequest jsonRequest = new JsonObjectRequest(
                 request.getMethod(),
                 request.get_url_request(),
                 request.getBody(),
@@ -48,7 +42,7 @@ public class WSCaller {
                         Log.d(TAG, "Request Success: " + request.get_url_request());
                         Log.d(TAG, "Response body: " + response != null ? response.toString() : "Response is null");
 
-                        request.getRequestResult().onSuccess(response);
+                        request.getRequestResult().onSuccess(new DataSourceResult(JsonManager.jsonToObject(response.toString(), request.getTypeResponse())));
                     }
                 },
                 new Response.ErrorListener() {
