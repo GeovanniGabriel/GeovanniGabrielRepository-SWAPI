@@ -30,7 +30,7 @@
                 android:layout_centerInParent="true"
                 android:theme="@style/ProgressLoader" />
 
-            <com.innocean.mykia.Views.CustomViews.StyleTextView
+            <TextView
                 android:id="@+id/txtMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

@@ -1,58 +1,60 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/toolbar_container"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/toolbar_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:layout_height="?android:attr/actionBarSize"
+    android:background="@color/rouge_two"
+    android:elevation="8dp">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorToolBar"
-        android:contentInsetEnd="0dp"
-        android:contentInsetLeft="0dp"
-        android:contentInsetRight="0dp"
-        android:contentInsetStart="0dp"
-        android:contentInsetStartWithNavigation="0dp"
-        app:contentInsetEnd="0dp"
-        app:contentInsetLeft="0dp"
-        app:contentInsetRight="0dp"
-        app:contentInsetStart="0dp"
-        app:contentInsetStartWithNavigation="0dp">
+        android:layout_height="?android:attr/actionBarSize"
+        android:background="@android:color/transparent"
+        android:minHeight="?android:attr/actionBarSize"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/imgBack"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/margin_medium"
+        android:padding="8dp"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/ic_stormtrooper"
+        tools:ignore="ContentDescription" />
 
-            <TextView
-                android:id="@+id/txtTitleBar"
-                style="@style/ToolbarTitleStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toStartOf="@+id/toolbar_right_space"
-                android:maxLines="2"
-                android:paddingEnd="@dimen/dimen_8"
-                android:paddingStart="@dimen/dimen_8"
-                android:text="" />
+    <ImageView
+        android:id="@+id/imgToolbar"
+        android:layout_width="wrap_content"
+        android:layout_height="36dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:padding="4dp"
+        app:srcCompat="@drawable/ic_stormtrooper"
+        tools:ignore="ContentDescription" />
 
-            <View
-                android:id="@+id/toolbar_right_space"
-                android:layout_width="?attr/actionBarSize"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_alignParentEnd="true"
-                android:visibility="gone" />
-
-        </RelativeLayout>
-
-    </android.support.v7.widget.Toolbar>
+    <ImageView
+        android:id="@+id/imgAction"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/margin_medium"
+        android:padding="8dp"
+        android:visibility="invisible"
+        app:srcCompat="@drawable/ic_stormtrooper"
+        tools:ignore="ContentDescription" />
 
     <View
-        android:id="@+id/toolbar_separator"
+        android:id="@+id/viewLineGray"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/white" />
+        android:background="@color/colorGray" />
 
-</LinearLayout>
+</RelativeLayout>

@@ -16,5 +16,5 @@
     <dimen name="margin_small">6dp</dimen>
     <dimen name="paddin_loader_height">15dp</dimen>
     <dimen name="paddin_loader_widht">20dp</dimen>
-
+    <dimen name="margin_medium">12dp</dimen>
 </resources>
