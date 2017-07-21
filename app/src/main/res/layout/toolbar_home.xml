@@ -39,6 +39,17 @@
         app:srcCompat="@drawable/ic_stormtrooper"
         tools:ignore="ContentDescription" />
 
+    <TextView
+        android:id="@+id/txtTitleBar"
+        style="@style/ToolbarTitleStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:paddingStart="@dimen/dimen_8"
+        android:paddingEnd="@dimen/dimen_8"
+        android:maxLines="2"
+        android:text="" />
+
     <ImageView
         android:id="@+id/imgAction"
         android:layout_width="wrap_content"

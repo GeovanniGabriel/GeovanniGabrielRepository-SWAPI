@@ -7,5 +7,5 @@ import android.support.v4.app.Fragment;
  */
 
 public interface IChangeFragments {
-    void replaceMainFragment(Fragment fragment, String titleFragment, String tagFragment, boolean addToBackStack);
+    void replaceMainFragment(Fragment fragment, String titleFragment, String tagFragment,String args, boolean addToBackStack);
 }

@@ -36,6 +36,26 @@ public abstract class BaseFragment extends Fragment {
     @BindView(R.id.textview_loader_message)
     TextView loaderMessageTextView;
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        this.context = context;
+        try {
+            toolbarListener = (IToolbarListener) context;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            if (context instanceof IBaseFragmentListener) {
+                baseFragmentListener = (IBaseFragmentListener) context;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

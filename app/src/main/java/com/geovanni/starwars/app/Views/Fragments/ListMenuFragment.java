@@ -31,9 +31,9 @@ public class ListMenuFragment extends BaseFragment implements IItemListener, IGe
 
     private MenuAdapter menuAdapter;
     private List<MenuItem> menuItems;
-    private IChangeFragments changeFragments;
     private View rootview;
     private RootPresenter rootPresenter;
+    private IChangeFragments changeFragments;
 
     @BindView(R.id.recycler_menu)
     RecyclerView menuRecyclerView;
@@ -58,12 +58,12 @@ public class ListMenuFragment extends BaseFragment implements IItemListener, IGe
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setupMenuRecyclerView();
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        setupMenuRecyclerView();
         rootPresenter.getRoots();
     }
 
@@ -111,7 +111,24 @@ public class ListMenuFragment extends BaseFragment implements IItemListener, IGe
 
     @Override
     public void onItemSelect(Object item, int action, int position) {
-
+        MenuItem menuItem = (MenuItem) item;
+        switch (menuItem.getName()) {
+            case "Films":
+                changeFragments.replaceMainFragment(FilmsFragment.newInstance(), getString(R.string.films), FilmsFragment.TAG, menuItem.getDetail(), true);
+                break;
+            case "People":
+                break;
+            case "Planets":
+                break;
+            case "Species":
+                break;
+            case "Starships":
+                break;
+            case "Vehicles":
+                break;
+            default:
+                break;
+        }
     }
 
     private List<MenuItem> loadMenuItems(final RootResponse data) {
@@ -165,7 +182,7 @@ public class ListMenuFragment extends BaseFragment implements IItemListener, IGe
             if (data.getVehicles() != null) {
                 menuItems.add(new MenuItem() {
                     {
-                        setName("People");
+                        setName("Vehicles");
                         setDetail(data.getVehicles());
                         setType(MenuItem.SIMPLE_MENU);
                     }

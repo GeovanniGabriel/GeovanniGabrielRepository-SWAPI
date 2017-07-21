@@ -11,9 +11,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.geovanni.starwars.app.Bussiness.Interfaces.IChangeFragments;
+import com.geovanni.starwars.app.Bussiness.Interfaces.IToolbarListener;
 import com.geovanni.starwars.app.R;
 import com.geovanni.starwars.app.Views.Base.BaseActivity;
 import com.geovanni.starwars.app.Views.Base.BaseFragment;
@@ -23,7 +26,7 @@ import com.geovanni.starwars.app.Views.Fragments.ListMenuFragment;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements IChangeFragments {
+public class MainActivity extends BaseActivity implements IChangeFragments, IToolbarListener {
 
     private ListMenuFragment mFragmentMenu;
     private String currentFragmentTag;
@@ -39,26 +42,40 @@ public class MainActivity extends BaseActivity implements IChangeFragments {
     @BindView(R.id.toolbar)
     Toolbar mToolbar;
 
+    @BindView(R.id.txtTitleBar)
+    TextView txtTitleBar;
+
+    @BindView(R.id.imgToolbar)
+    ImageView imgToolbar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        setupToolbar();
+
         mFragmentMenu = (ListMenuFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentMenu);
         mFragmentMenu.setChangeFragments(this);
 
         setupViews();
 
-        replaceMainFragment(HomeFragment.newInstance(), getString(R.string.start), HomeFragment.TAG, false);
+        replaceMainFragment(HomeFragment.newInstance(), getString(R.string.start), HomeFragment.TAG, null, false);
     }
 
     @Override
-    public void replaceMainFragment(Fragment fragment, String titleFragment, String tagFragment, boolean addToBackStack) {
+    public void replaceMainFragment(Fragment fragment, String titleFragment, String tagFragment, String args, boolean addToBackStack) {
         drawerLayout.closeDrawer(Gravity.LEFT);
 
         if (tagFragment.equals(currentFragmentTag)) {
             return;
+        }
+
+        if (args != null) {
+            Bundle bundle = new Bundle();
+            bundle.putString("urlFilms", args);
+            fragment.setArguments(bundle);
         }
 
         currentFragmentTag = tagFragment;
@@ -74,6 +91,17 @@ public class MainActivity extends BaseActivity implements IChangeFragments {
 
         if (fragment instanceof BaseFragment) {
             baseFragment = (BaseFragment) fragment;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+        } else {
+            getSupportFragmentManager().popBackStack();
         }
     }
 
@@ -98,4 +126,18 @@ public class MainActivity extends BaseActivity implements IChangeFragments {
         drawerToggle.syncState();
     }
 
+    @Override
+    public void updateToolbar(String title, ToolbarSettings settings, String tag) {
+        imgToolbar.setVisibility(View.INVISIBLE);
+        txtTitleBar.setText(title);
+        invalidateOptionsMenu();
+    }
+
+    private void setupToolbar() {
+        if (mToolbar != null) {
+            setSupportActionBar(mToolbar);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
+    }
 }
