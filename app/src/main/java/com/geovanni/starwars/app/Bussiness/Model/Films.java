@@ -3,10 +3,10 @@ package com.geovanni.starwars.app.Bussiness.Model;
 import java.io.Serializable;
 
 /**
- * Created by gabri on 20/07/2017.
+ * Created by gabri on 21/07/2017.
  */
 
-public class Film implements Serializable {
+public class Films implements Serializable {
     private String edited;
 
     private String[] starships;

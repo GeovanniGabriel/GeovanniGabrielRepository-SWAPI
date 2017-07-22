@@ -1,20 +1,23 @@
 package com.geovanni.starwars.app.Bussiness.Model;
 
-import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by gabri on 20/07/2017.
  */
 
-public class FilmsResponse implements Serializable {
+public class FilmsResponse {
 
-    private Film[] results;
+    private List<Films> results;
 
-    public Film[] getResults() {
+    public FilmsResponse() {
+    }
+
+    public List<Films> getResults() {
         return results;
     }
 
-    public void setResults(Film[] results) {
+    public void setResults(List<Films> results) {
         this.results = results;
     }
 

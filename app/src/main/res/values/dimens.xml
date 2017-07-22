@@ -17,4 +17,6 @@
     <dimen name="paddin_loader_height">15dp</dimen>
     <dimen name="paddin_loader_widht">20dp</dimen>
     <dimen name="margin_medium">12dp</dimen>
+    <dimen name="card_view_elevation">4dp</dimen>
+    <dimen name="card_view_corner_radius">8dp</dimen>
 </resources>

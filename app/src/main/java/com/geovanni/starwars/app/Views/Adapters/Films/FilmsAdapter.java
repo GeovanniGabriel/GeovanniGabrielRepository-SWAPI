@@ -1,12 +1,15 @@
 package com.geovanni.starwars.app.Views.Adapters.Films;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.geovanni.starwars.app.Bussiness.Interfaces.IItemListener;
-import com.geovanni.starwars.app.Bussiness.Model.FilmItem;
+import com.geovanni.starwars.app.Bussiness.Model.Films;
+import com.geovanni.starwars.app.R;
 import com.geovanni.starwars.app.Views.Adapters.Base.ViewHolderItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -15,16 +18,18 @@ import java.util.List;
 
 public class FilmsAdapter extends RecyclerView.Adapter<ViewHolderItem> {
 
-    private List<FilmItem> filmItems;
+    private List<Films> filmItems;
     private IItemListener itemListener;
 
     public FilmsAdapter(IItemListener itemListener) {
         this.itemListener = itemListener;
+        filmItems = new ArrayList<>();
     }
 
     @Override
     public ViewHolderItem onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        return new FilmViewHolder(layoutInflater.inflate(R.layout.item_film_row, parent, false), itemListener);
     }
 
     @Override
@@ -37,11 +42,10 @@ public class FilmsAdapter extends RecyclerView.Adapter<ViewHolderItem> {
         return filmItems.size();
     }
 
-    public void replaceData(List<FilmItem> menuItems) {
+    public void replaceData(List<Films> filmItems) {
         if (filmItems != null) {
             this.filmItems = filmItems;
         }
-
         notifyDataSetChanged();
     }
 }

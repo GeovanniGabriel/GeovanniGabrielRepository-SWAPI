@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.geovanni.starwars.app.Bussiness.Interfaces.IGetContent;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IItemListener;
-import com.geovanni.starwars.app.Bussiness.Model.FilmItem;
+import com.geovanni.starwars.app.Bussiness.Model.Films;
 import com.geovanni.starwars.app.Bussiness.Model.FilmsResponse;
 import com.geovanni.starwars.app.Bussiness.Presenters.FilmsPresenter;
 import com.geovanni.starwars.app.Bussiness.WSCaller.DataSourceResult;
@@ -30,7 +30,7 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
 
     private FilmsPresenter filmsPresenter;
     private FilmsAdapter filmsAdapter;
-    private List<FilmItem> filmItems;
+    private List<Films> filmItems;
     private String urlFilms;
 
     @BindView(R.id.recycler_films)
@@ -93,11 +93,13 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
     public void showContent(Object content) {
         DataSourceResult response = (DataSourceResult) content;
         FilmsResponse filmsData = (FilmsResponse) response.getData();
+        filmItems = filmsData.getResults();
+        filmsAdapter.replaceData(filmItems);
     }
 
     private void setupMenuRecyclerView() {
         menuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        // menuRecyclerView.setAdapter(menuAdapter);
+        menuRecyclerView.setAdapter(filmsAdapter);
     }
 
     @Override
