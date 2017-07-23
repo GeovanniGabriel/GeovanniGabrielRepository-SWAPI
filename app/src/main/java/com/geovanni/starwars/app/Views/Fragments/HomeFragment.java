@@ -40,6 +40,12 @@ public class HomeFragment extends BaseFragment implements IGetContent<Object> {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        showToolbarDefaultMode();
+    }
+
+    @Override
     protected int getLayoutResourceId() {
         return R.layout.fragment_home;
     }
@@ -67,6 +73,10 @@ public class HomeFragment extends BaseFragment implements IGetContent<Object> {
     @Override
     public void showContent(Object content) {
 
+    }
+
+    private void showToolbarDefaultMode() {
+        updateToolbar(getString(R.string.inicio));
     }
 
 }

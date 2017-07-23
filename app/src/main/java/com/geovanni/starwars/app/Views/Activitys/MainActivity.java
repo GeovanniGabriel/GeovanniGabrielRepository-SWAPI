@@ -16,17 +16,19 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.geovanni.starwars.app.Bussiness.Interfaces.IChangeFragments;
+import com.geovanni.starwars.app.Bussiness.Interfaces.IProgressLayout;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IToolbarListener;
 import com.geovanni.starwars.app.R;
 import com.geovanni.starwars.app.Views.Base.BaseActivity;
 import com.geovanni.starwars.app.Views.Base.BaseFragment;
+import com.geovanni.starwars.app.Views.CustomViews.ProgressLayout;
 import com.geovanni.starwars.app.Views.Fragments.HomeFragment;
 import com.geovanni.starwars.app.Views.Fragments.ListMenuFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements IChangeFragments, IToolbarListener {
+public class MainActivity extends BaseActivity implements IChangeFragments, IToolbarListener, IProgressLayout {
 
     private ListMenuFragment mFragmentMenu;
     private String currentFragmentTag;
@@ -52,8 +54,7 @@ public class MainActivity extends BaseActivity implements IChangeFragments, IToo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
-
+        initViews();
         setupToolbar();
 
         mFragmentMenu = (ListMenuFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentMenu);
@@ -62,6 +63,11 @@ public class MainActivity extends BaseActivity implements IChangeFragments, IToo
         setupViews();
 
         replaceMainFragment(HomeFragment.newInstance(), getString(R.string.start), HomeFragment.TAG, null, false);
+    }
+
+    @Override
+    protected void initViews() {
+        super.initViews();
     }
 
     @Override
@@ -74,7 +80,7 @@ public class MainActivity extends BaseActivity implements IChangeFragments, IToo
 
         if (args != null) {
             Bundle bundle = new Bundle();
-            bundle.putString("urlFilms", args);
+            bundle.putString("urlRootDetail", args);
             fragment.setArguments(bundle);
         }
 
@@ -128,8 +134,15 @@ public class MainActivity extends BaseActivity implements IChangeFragments, IToo
 
     @Override
     public void updateToolbar(String title, ToolbarSettings settings, String tag) {
-        imgToolbar.setVisibility(View.INVISIBLE);
-        txtTitleBar.setText(title);
+
+        if (title.equals("Inicio")) {
+            imgToolbar.setVisibility(View.VISIBLE);
+            txtTitleBar.setVisibility(View.INVISIBLE);
+        } else {
+            imgToolbar.setVisibility(View.INVISIBLE);
+            txtTitleBar.setVisibility(View.VISIBLE);
+            txtTitleBar.setText(title);
+        }
         invalidateOptionsMenu();
     }
 
@@ -139,5 +152,10 @@ public class MainActivity extends BaseActivity implements IChangeFragments, IToo
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowTitleEnabled(false);
         }
+    }
+
+    @Override
+    public ProgressLayout getProgress() {
+        return getProgressLayout();
     }
 }

@@ -117,6 +117,7 @@ public class ListMenuFragment extends BaseFragment implements IItemListener, IGe
                 changeFragments.replaceMainFragment(FilmsFragment.newInstance(), getString(R.string.films), FilmsFragment.TAG, menuItem.getDetail(), true);
                 break;
             case "People":
+                changeFragments.replaceMainFragment(PeopleFragment.newInstance(), getString(R.string.people), PeopleFragment.TAG, menuItem.getDetail(), true);
                 break;
             case "Planets":
                 break;

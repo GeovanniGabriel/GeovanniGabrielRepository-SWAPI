@@ -14,6 +14,8 @@
     <dimen name="margin_doble">25dp</dimen>
     <dimen name="header_height">100dp</dimen>
     <dimen name="margin_small">6dp</dimen>
+    <dimen name="generic_padig">8dp</dimen>
+    <dimen name="margin_cardview_vertical">8dp</dimen>
     <dimen name="paddin_loader_height">15dp</dimen>
     <dimen name="paddin_loader_widht">20dp</dimen>
     <dimen name="margin_medium">12dp</dimen>

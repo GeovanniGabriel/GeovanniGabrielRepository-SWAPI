@@ -25,6 +25,11 @@ public class FilmsPresenter implements IWSRequestResult<Object> {
         filmsInteractor.getFilms(url);
     }
 
+    public void getPeople(String url) {
+        view.showProgress();
+        filmsInteractor.getPeople(url);
+    }
+
     @Override
     public void onSuccess(Object object) {
         view.hideProgress();

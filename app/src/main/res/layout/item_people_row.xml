@@ -22,21 +22,19 @@
         android:paddingBottom="20dp">
 
         <TextView
-            android:id="@+id/txtNameFilm"
+            android:id="@+id/txtNamePeople"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:maxLines="1"
-            android:text="A New Hope"
+            android:text="Luke Skywalker"
             android:textColor="@color/rouge_two"
             android:textSize="20sp" />
 
         <TextView
-            android:id="@+id/txtDescription"
+            android:id="@+id/txtHeight"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:maxLines="3"
-            android:text="It is a d of civil war. Rebel mode that "
+            android:text="172"
             android:textColor="@color/rouge_two"
             android:textSize="15sp" />
 

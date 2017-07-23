@@ -11,12 +11,12 @@ import android.view.View;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IGetContent;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IItemListener;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IProgressLayout;
-import com.geovanni.starwars.app.Bussiness.Model.Films;
-import com.geovanni.starwars.app.Bussiness.Model.FilmsResponse;
+import com.geovanni.starwars.app.Bussiness.Model.People;
+import com.geovanni.starwars.app.Bussiness.Model.PeopleResponse;
 import com.geovanni.starwars.app.Bussiness.Presenters.FilmsPresenter;
 import com.geovanni.starwars.app.Bussiness.WSCaller.DataSourceResult;
 import com.geovanni.starwars.app.R;
-import com.geovanni.starwars.app.Views.Adapters.Films.FilmsAdapter;
+import com.geovanni.starwars.app.Views.Adapters.People.PeopleAdapter;
 import com.geovanni.starwars.app.Views.Base.BaseFragment;
 
 import java.util.ArrayList;
@@ -25,26 +25,27 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by gabri on 20/07/2017.
+ * Created by gabri on 23/07/2017.
  */
 
-public class FilmsFragment extends BaseFragment implements IItemListener, IGetContent {
-    public static final String TAG = FilmsFragment.class.getSimpleName();
+public class PeopleFragment extends BaseFragment implements IItemListener, IGetContent {
 
-    private FilmsPresenter filmsPresenter;
-    private FilmsAdapter filmsAdapter;
-    private List<Films> filmItems;
-    private String urlFilms;
+    public static final String TAG = PeopleFragment.class.getSimpleName();
+
+    private FilmsPresenter peoplePresenter;
+    private PeopleAdapter peopleAdapter;
+    private List<People> peopleItems;
+    private String urlPeople;
     private IProgressLayout iProgressLayout;
 
     @BindView(R.id.recycler_films)
     RecyclerView menuRecyclerView;
 
-    public FilmsFragment() {
+    public PeopleFragment() {
     }
 
-    public static FilmsFragment newInstance() {
-        FilmsFragment fragment = new FilmsFragment();
+    public static PeopleFragment newInstance() {
+        PeopleFragment fragment = new PeopleFragment();
         return fragment;
     }
 
@@ -61,16 +62,15 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        filmsPresenter = new FilmsPresenter(getCurrentContext(), this);
-        filmsAdapter = new FilmsAdapter(this);
-        filmItems = new ArrayList<>();
+        peoplePresenter = new FilmsPresenter(getCurrentContext(), this);
+        peopleAdapter = new PeopleAdapter(this);
+        peopleItems = new ArrayList<>();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        urlFilms = getArguments().getString("urlRootDetail");
+        urlPeople = getArguments().getString("urlRootDetail");
     }
 
     @Override
@@ -78,17 +78,7 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
         super.onResume();
         showToolbarDefaultMode();
         setupMenuRecyclerView();
-        filmsPresenter.getFilms(urlFilms);
-    }
-
-    @Override
-    protected int getLayoutResourceId() {
-        return R.layout.fragment_films;
-    }
-
-    @Override
-    protected String getCustomTag() {
-        return TAG;
+        peoplePresenter.getPeople(urlPeople);
     }
 
     @Override
@@ -103,19 +93,20 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
 
     @Override
     public void showError(Throwable throwable) {
+
     }
 
     @Override
     public void showContent(Object content) {
         DataSourceResult response = (DataSourceResult) content;
-        FilmsResponse filmsData = (FilmsResponse) response.getData();
-        filmItems = filmsData.getResults();
-        filmsAdapter.replaceData(filmItems);
+        PeopleResponse peopleData = (PeopleResponse) response.getData();
+        peopleItems = peopleData.getResults();
+        peopleAdapter.replaceData(peopleItems);
     }
 
     private void setupMenuRecyclerView() {
         menuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        menuRecyclerView.setAdapter(filmsAdapter);
+        menuRecyclerView.setAdapter(peopleAdapter);
     }
 
     @Override
@@ -123,7 +114,17 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
 
     }
 
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.fragment_people;
+    }
+
+    @Override
+    protected String getCustomTag() {
+        return null;
+    }
+
     private void showToolbarDefaultMode() {
-        updateToolbar(getString(R.string.films));
+        updateToolbar(getString(R.string.people));
     }
 }
