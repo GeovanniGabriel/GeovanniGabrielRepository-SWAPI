@@ -9,6 +9,7 @@ import com.geovanni.starwars.app.Bussiness.Model.FilmsResponse;
 import com.geovanni.starwars.app.Bussiness.Model.PeopleResponse;
 import com.geovanni.starwars.app.Bussiness.Model.PlanetsResponse;
 import com.geovanni.starwars.app.Bussiness.Model.StarshipsResponse;
+import com.geovanni.starwars.app.Bussiness.Model.VehiclesResponse;
 
 /**
  * Created by gabri on 20/07/2017.
@@ -42,6 +43,11 @@ public class FilmsPresenter implements IWSRequestResult<Object> {
     public void getStarships(String url) {
         view.showProgress();
         filmsInteractor.getData(url, StarshipsResponse.class);
+    }
+
+    public void getVehicles(String url) {
+        view.showProgress();
+        filmsInteractor.getData(url, VehiclesResponse.class);
     }
 
     @Override

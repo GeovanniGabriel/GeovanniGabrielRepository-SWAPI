@@ -39,7 +39,7 @@ public class PeopleFragment extends BaseFragment implements IItemListener, IGetC
     private String urlPeople;
     private IProgressLayout iProgressLayout;
 
-    @BindView(R.id.recycler_films)
+    @BindView(R.id.recycler_people)
     RecyclerView menuRecyclerView;
 
     public PeopleFragment() {
@@ -78,7 +78,7 @@ public class PeopleFragment extends BaseFragment implements IItemListener, IGetC
     public void onResume() {
         super.onResume();
         showToolbarDefaultMode();
-        setupMenuRecyclerView();
+        setupRecyclerView();
         peoplePresenter.getPeople(urlPeople);
     }
 
@@ -105,7 +105,7 @@ public class PeopleFragment extends BaseFragment implements IItemListener, IGetC
         peopleAdapter.replaceData(peopleItems);
     }
 
-    private void setupMenuRecyclerView() {
+    private void setupRecyclerView() {
         menuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         menuRecyclerView.setAdapter(peopleAdapter);
     }

@@ -79,7 +79,7 @@ public class PlanetsFragment extends BaseFragment implements IItemListener, IGet
     public void onResume() {
         super.onResume();
         showToolbarDefaultMode();
-        setupMenuRecyclerView();
+        setupRecyclerView();
         planetsPresenter.getPlanets(urlPlanets);
     }
 
@@ -121,7 +121,7 @@ public class PlanetsFragment extends BaseFragment implements IItemListener, IGet
         return TAG;
     }
 
-    private void setupMenuRecyclerView() {
+    private void setupRecyclerView() {
         menuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         menuRecyclerView.setAdapter(planetsAdapter);
     }

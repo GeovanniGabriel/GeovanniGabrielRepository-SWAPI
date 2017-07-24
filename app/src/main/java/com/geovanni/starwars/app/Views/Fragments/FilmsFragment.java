@@ -78,7 +78,7 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
     public void onResume() {
         super.onResume();
         showToolbarDefaultMode();
-        setupMenuRecyclerView();
+        setupRecyclerView();
         filmsPresenter.getFilms(urlFilms);
     }
 
@@ -115,7 +115,7 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
         filmsAdapter.replaceData(filmItems);
     }
 
-    private void setupMenuRecyclerView() {
+    private void setupRecyclerView() {
         menuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         menuRecyclerView.setAdapter(filmsAdapter);
     }
