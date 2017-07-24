@@ -38,6 +38,22 @@
             android:textColor="@color/rouge_two"
             android:textSize="15sp" />
 
+        <TextView
+            android:id="@+id/txtHairColor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="172"
+            android:textColor="@color/rouge_two"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/txtBirthYear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="172"
+            android:textColor="@color/rouge_two"
+            android:textSize="15sp" />
+
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

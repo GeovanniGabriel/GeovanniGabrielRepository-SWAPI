@@ -15,16 +15,25 @@ import com.geovanni.starwars.app.Views.Adapters.Base.ViewHolderItem;
 public class PeopleViewHolder extends ViewHolderItem<People> {
 
     private TextView namePeopleTextView;
+    private TextView heightTextView;
+    private TextView hairColorTextview;
+    private TextView birthYearTextView;
 
     public PeopleViewHolder(View itemView, IItemListener callback) {
         super(itemView);
         adapterCallback = callback;
         namePeopleTextView = (TextView) itemView.findViewById(R.id.txtNamePeople);
+        heightTextView = (TextView) itemView.findViewById(R.id.txtHeight);
+        hairColorTextview = (TextView) itemView.findViewById(R.id.txtHairColor);
+        birthYearTextView = (TextView) itemView.findViewById(R.id.txtBirthYear);
     }
 
     @Override
     public void bindItem(People item) {
         super.bindItem(item);
         namePeopleTextView.setText(item.getName());
+        heightTextView.setText("Height: " + item.getHeight());
+        hairColorTextview.setText("Hair color: " + item.getHair_color());
+        birthYearTextView.setText("Birth Year: " + item.getBirth_year());
     }
 }
