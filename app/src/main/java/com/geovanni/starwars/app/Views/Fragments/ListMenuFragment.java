@@ -123,6 +123,7 @@ public class ListMenuFragment extends BaseFragment implements IItemListener, IGe
                 changeFragments.replaceMainFragment(PlanetsFragment.newInstance(), getString(R.string.planets), PlanetsFragment.TAG, menuItem.getDetail(), true);
                 break;
             case "Species":
+                changeFragments.replaceMainFragment(SpeciesFragment.newInstance(), getString(R.string.planets), SpeciesFragment.TAG, menuItem.getDetail(), true);
                 break;
             case "Starships":
                 changeFragments.replaceMainFragment(StarshipsFragment.newInstance(), getString(R.string.starships), StarshipsFragment.TAG, menuItem.getDetail(), true);

@@ -11,13 +11,13 @@ import android.view.View;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IGetContent;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IItemListener;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IProgressLayout;
-import com.geovanni.starwars.app.Bussiness.Model.Films;
-import com.geovanni.starwars.app.Bussiness.Model.FilmsResponse;
+import com.geovanni.starwars.app.Bussiness.Model.Species;
+import com.geovanni.starwars.app.Bussiness.Model.SpeciesResponse;
 import com.geovanni.starwars.app.Bussiness.Presenters.FilmsPresenter;
 import com.geovanni.starwars.app.Bussiness.Utils.Alerts;
 import com.geovanni.starwars.app.Bussiness.WSCaller.DataSourceResult;
 import com.geovanni.starwars.app.R;
-import com.geovanni.starwars.app.Views.Adapters.Films.FilmsAdapter;
+import com.geovanni.starwars.app.Views.Adapters.Species.SpeciesAdapter;
 import com.geovanni.starwars.app.Views.Base.BaseFragment;
 
 import java.util.ArrayList;
@@ -26,26 +26,26 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by gabri on 20/07/2017.
+ * Created by gabri on 24/07/2017.
  */
 
-public class FilmsFragment extends BaseFragment implements IItemListener, IGetContent {
-    public static final String TAG = FilmsFragment.class.getSimpleName();
+public class SpeciesFragment extends BaseFragment implements IItemListener, IGetContent {
+    public static final String TAG = SpeciesFragment.class.getSimpleName();
 
-    private FilmsPresenter filmsPresenter;
-    private FilmsAdapter filmsAdapter;
-    private List<Films> filmItems;
-    private String urlFilms;
     private IProgressLayout iProgressLayout;
+    private String urlSpecies;
+    private FilmsPresenter speciesPresenter;
+    private List<Species> speciesItems;
+    private SpeciesAdapter speciesAdapter;
 
-    @BindView(R.id.recycler_films)
-    RecyclerView filmsRecyclerView;
+    @BindView(R.id.recycler_species)
+    RecyclerView speciesRecyclerView;
 
-    public FilmsFragment() {
+    public SpeciesFragment() {
     }
 
-    public static FilmsFragment newInstance() {
-        FilmsFragment fragment = new FilmsFragment();
+    public static SpeciesFragment newInstance() {
+        SpeciesFragment fragment = new SpeciesFragment();
         return fragment;
     }
 
@@ -63,15 +63,15 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        filmsPresenter = new FilmsPresenter(getCurrentContext(), this);
-        filmsAdapter = new FilmsAdapter(this);
-        filmItems = new ArrayList<>();
+        speciesPresenter = new FilmsPresenter(getCurrentContext(), this);
+        speciesAdapter = new SpeciesAdapter(this);
+        speciesItems = new ArrayList<>();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        urlFilms = getArguments().getString("urlRootDetail");
+        urlSpecies = getArguments().getString("urlRootDetail");
     }
 
     @Override
@@ -79,17 +79,7 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
         super.onResume();
         showToolbarDefaultMode();
         setupRecyclerView();
-        filmsPresenter.getFilms(urlFilms);
-    }
-
-    @Override
-    protected int getLayoutResourceId() {
-        return R.layout.fragment_films;
-    }
-
-    @Override
-    protected String getCustomTag() {
-        return TAG;
+        speciesPresenter.getSpecies(urlSpecies);
     }
 
     @Override
@@ -110,14 +100,9 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
     @Override
     public void showContent(Object content) {
         DataSourceResult response = (DataSourceResult) content;
-        FilmsResponse filmsData = (FilmsResponse) response.getData();
-        filmItems = filmsData.getResults();
-        filmsAdapter.replaceData(filmItems);
-    }
-
-    private void setupRecyclerView() {
-        filmsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        filmsRecyclerView.setAdapter(filmsAdapter);
+        SpeciesResponse speciesData = (SpeciesResponse) response.getData();
+        speciesItems = speciesData.getResults();
+        speciesAdapter.replaceData(speciesItems);
     }
 
     @Override
@@ -125,7 +110,22 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
 
     }
 
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.fragment_species;
+    }
+
+    @Override
+    protected String getCustomTag() {
+        return TAG;
+    }
+
     private void showToolbarDefaultMode() {
-        updateToolbar(getString(R.string.films));
+        updateToolbar(getString(R.string.species));
+    }
+
+    private void setupRecyclerView() {
+        speciesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        speciesRecyclerView.setAdapter(speciesAdapter);
     }
 }
