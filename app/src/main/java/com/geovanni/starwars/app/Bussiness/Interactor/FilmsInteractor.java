@@ -9,6 +9,7 @@ import com.geovanni.starwars.app.Bussiness.Model.PlanetsResponse;
 import com.geovanni.starwars.app.Bussiness.Utils.Enums;
 import com.geovanni.starwars.app.Bussiness.WSCaller.WebServicesFacade;
 
+import java.lang.reflect.Type;
 import java.util.HashMap;
 
 /**
@@ -25,18 +26,9 @@ public class FilmsInteractor {
         this.requestResult = requestResult;
     }
 
-    public void getFilms(String urlFilms) {
+    public void getData(String urlFilms, Type responseType) {
         WebServicesFacade webServicesFacade = new WebServicesFacade(context);
-        webServicesFacade.consumeWS(Enums.METHOD_GET, urlFilms, headers, this.requestResult, FilmsResponse.class);
+        webServicesFacade.consumeWS(Enums.METHOD_GET, urlFilms, headers, this.requestResult, responseType);
     }
 
-    public void getPeople(String urlPeople) {
-        WebServicesFacade webServicesFacade = new WebServicesFacade(context);
-        webServicesFacade.consumeWS(Enums.METHOD_GET, urlPeople, headers, this.requestResult, PeopleResponse.class);
-    }
-
-    public void getPlanets(String urlPlanets) {
-        WebServicesFacade webServicesFacade = new WebServicesFacade(context);
-        webServicesFacade.consumeWS(Enums.METHOD_GET, urlPlanets, headers, this.requestResult, PlanetsResponse.class);
-    }
 }

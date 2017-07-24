@@ -14,6 +14,7 @@ import com.geovanni.starwars.app.Bussiness.Interfaces.IProgressLayout;
 import com.geovanni.starwars.app.Bussiness.Model.People;
 import com.geovanni.starwars.app.Bussiness.Model.PeopleResponse;
 import com.geovanni.starwars.app.Bussiness.Presenters.FilmsPresenter;
+import com.geovanni.starwars.app.Bussiness.Utils.Alerts;
 import com.geovanni.starwars.app.Bussiness.WSCaller.DataSourceResult;
 import com.geovanni.starwars.app.R;
 import com.geovanni.starwars.app.Views.Adapters.People.PeopleAdapter;
@@ -93,7 +94,7 @@ public class PeopleFragment extends BaseFragment implements IItemListener, IGetC
 
     @Override
     public void showError(Throwable throwable) {
-
+        Alerts.showAlertMessage(getCurrentContext(), throwable.getMessage());
     }
 
     @Override

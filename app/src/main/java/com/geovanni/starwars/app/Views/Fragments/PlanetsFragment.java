@@ -14,8 +14,10 @@ import com.geovanni.starwars.app.Bussiness.Interfaces.IProgressLayout;
 import com.geovanni.starwars.app.Bussiness.Model.Planets;
 import com.geovanni.starwars.app.Bussiness.Model.PlanetsResponse;
 import com.geovanni.starwars.app.Bussiness.Presenters.FilmsPresenter;
+import com.geovanni.starwars.app.Bussiness.Utils.Alerts;
 import com.geovanni.starwars.app.Bussiness.WSCaller.DataSourceResult;
 import com.geovanni.starwars.app.R;
+import com.geovanni.starwars.app.Views.Adapters.Planets.PlanetsAdapter;
 import com.geovanni.starwars.app.Views.Base.BaseFragment;
 
 import java.util.ArrayList;
@@ -34,6 +36,7 @@ public class PlanetsFragment extends BaseFragment implements IItemListener, IGet
     private String urlPlanets;
     private IProgressLayout iProgressLayout;
     private FilmsPresenter planetsPresenter;
+    private PlanetsAdapter planetsAdapter;
     private List<Planets> planetsItems;
 
     @BindView(R.id.recycler_planets)
@@ -50,7 +53,9 @@ public class PlanetsFragment extends BaseFragment implements IItemListener, IGet
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         planetsPresenter = new FilmsPresenter(getCurrentContext(), this);
+        planetsAdapter = new PlanetsAdapter(this);
         planetsItems = new ArrayList<>();
     }
 
@@ -90,7 +95,7 @@ public class PlanetsFragment extends BaseFragment implements IItemListener, IGet
 
     @Override
     public void showError(Throwable throwable) {
-
+        Alerts.showAlertMessage(getCurrentContext(), throwable.getMessage());
     }
 
     @Override
@@ -98,6 +103,7 @@ public class PlanetsFragment extends BaseFragment implements IItemListener, IGet
         DataSourceResult response = (DataSourceResult) content;
         PlanetsResponse planetsData = (PlanetsResponse) response.getData();
         planetsItems = planetsData.getResults();
+        planetsAdapter.replaceData(planetsItems);
     }
 
     @Override
@@ -117,7 +123,7 @@ public class PlanetsFragment extends BaseFragment implements IItemListener, IGet
 
     private void setupMenuRecyclerView() {
         menuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        //menuRecyclerView.setAdapter(filmsAdapter);
+        menuRecyclerView.setAdapter(planetsAdapter);
     }
 
     private void showToolbarDefaultMode() {

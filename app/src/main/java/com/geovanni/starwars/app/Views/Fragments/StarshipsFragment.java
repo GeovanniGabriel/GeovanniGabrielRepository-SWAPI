@@ -11,13 +11,13 @@ import android.view.View;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IGetContent;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IItemListener;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IProgressLayout;
-import com.geovanni.starwars.app.Bussiness.Model.Films;
-import com.geovanni.starwars.app.Bussiness.Model.FilmsResponse;
+import com.geovanni.starwars.app.Bussiness.Model.Starships;
+import com.geovanni.starwars.app.Bussiness.Model.StarshipsResponse;
 import com.geovanni.starwars.app.Bussiness.Presenters.FilmsPresenter;
 import com.geovanni.starwars.app.Bussiness.Utils.Alerts;
 import com.geovanni.starwars.app.Bussiness.WSCaller.DataSourceResult;
 import com.geovanni.starwars.app.R;
-import com.geovanni.starwars.app.Views.Adapters.Films.FilmsAdapter;
+import com.geovanni.starwars.app.Views.Adapters.Starships.StarshipsAdapter;
 import com.geovanni.starwars.app.Views.Base.BaseFragment;
 
 import java.util.ArrayList;
@@ -26,26 +26,27 @@ import java.util.List;
 import butterknife.BindView;
 
 /**
- * Created by gabri on 20/07/2017.
+ * Created by gabri on 24/07/2017.
  */
 
-public class FilmsFragment extends BaseFragment implements IItemListener, IGetContent {
-    public static final String TAG = FilmsFragment.class.getSimpleName();
+public class StarshipsFragment extends BaseFragment implements IItemListener, IGetContent {
 
-    private FilmsPresenter filmsPresenter;
-    private FilmsAdapter filmsAdapter;
-    private List<Films> filmItems;
-    private String urlFilms;
+    public static final String TAG = StarshipsFragment.class.getSimpleName();
+
     private IProgressLayout iProgressLayout;
+    private FilmsPresenter starshipsPresenter;
+    private StarshipsAdapter starshipsAdapter;
+    private String urlStarships;
+    private List<Starships> starshipItems;
 
-    @BindView(R.id.recycler_films)
-    RecyclerView menuRecyclerView;
+    @BindView(R.id.recycler_starships)
+    RecyclerView starshipsRecyclerView;
 
-    public FilmsFragment() {
+    public StarshipsFragment() {
     }
 
-    public static FilmsFragment newInstance() {
-        FilmsFragment fragment = new FilmsFragment();
+    public static StarshipsFragment newInstance() {
+        StarshipsFragment fragment = new StarshipsFragment();
         return fragment;
     }
 
@@ -62,16 +63,15 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        filmsPresenter = new FilmsPresenter(getCurrentContext(), this);
-        filmsAdapter = new FilmsAdapter(this);
-        filmItems = new ArrayList<>();
+        starshipsPresenter = new FilmsPresenter(getCurrentContext(), this);
+        starshipsAdapter = new StarshipsAdapter(this);
+        starshipItems = new ArrayList<>();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        urlFilms = getArguments().getString("urlRootDetail");
+        urlStarships = getArguments().getString("urlRootDetail");
     }
 
     @Override
@@ -79,17 +79,7 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
         super.onResume();
         showToolbarDefaultMode();
         setupMenuRecyclerView();
-        filmsPresenter.getFilms(urlFilms);
-    }
-
-    @Override
-    protected int getLayoutResourceId() {
-        return R.layout.fragment_films;
-    }
-
-    @Override
-    protected String getCustomTag() {
-        return TAG;
+        starshipsPresenter.getStarships(urlStarships);
     }
 
     @Override
@@ -110,14 +100,9 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
     @Override
     public void showContent(Object content) {
         DataSourceResult response = (DataSourceResult) content;
-        FilmsResponse filmsData = (FilmsResponse) response.getData();
-        filmItems = filmsData.getResults();
-        filmsAdapter.replaceData(filmItems);
-    }
-
-    private void setupMenuRecyclerView() {
-        menuRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        menuRecyclerView.setAdapter(filmsAdapter);
+        StarshipsResponse starshipsData = (StarshipsResponse) response.getData();
+        starshipItems = starshipsData.getResults();
+        starshipsAdapter.replaceData(starshipItems);
     }
 
     @Override
@@ -125,7 +110,22 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
 
     }
 
+    @Override
+    protected int getLayoutResourceId() {
+        return R.layout.fragment_starships;
+    }
+
+    @Override
+    protected String getCustomTag() {
+        return TAG;
+    }
+
+    private void setupMenuRecyclerView() {
+        starshipsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+        starshipsRecyclerView.setAdapter(starshipsAdapter);
+    }
+
     private void showToolbarDefaultMode() {
-        updateToolbar(getString(R.string.films));
+        updateToolbar(getString(R.string.starships));
     }
 }
