@@ -76,18 +76,10 @@ public abstract class BaseFragment extends Fragment {
         return this.context;
     }
 
-    protected void executeAction(int action, Object... params) {
-
-    }
-
     protected void notifyActivityAction(Fragment fragment, int action, Object... params) {
         if (baseFragmentListener != null) {
             baseFragmentListener.onFragmentAction(fragment, action, params);
         }
-    }
-
-    protected boolean isActivityRunning() {
-        return !((Activity) getCurrentContext()).isFinishing();
     }
 
     protected abstract int getLayoutResourceId();

@@ -7,6 +7,7 @@ import com.geovanni.starwars.app.Bussiness.Interfaces.IGetContent;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IWSRequestResult;
 import com.geovanni.starwars.app.Bussiness.Model.Films;
 import com.geovanni.starwars.app.Bussiness.Model.FilmsResponse;
+import com.geovanni.starwars.app.Bussiness.Model.People;
 import com.geovanni.starwars.app.Bussiness.Model.PeopleResponse;
 import com.geovanni.starwars.app.Bussiness.Model.PlanetsResponse;
 import com.geovanni.starwars.app.Bussiness.Model.SpeciesResponse;
@@ -60,6 +61,11 @@ public class FilmsPresenter implements IWSRequestResult<Object> {
     public void getFilmsDetail(String url) {
         view.showProgress();
         filmsInteractor.getData(url, Films.class);
+    }
+
+    public void getPeopleDetail(String url) {
+        view.showProgress();
+        filmsInteractor.getData(url, People.class);
     }
 
     @Override
