@@ -37,6 +37,7 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
     private List<Films> filmItems;
     private String urlFilms;
     private IProgressLayout iProgressLayout;
+    public static final int ACTION_SHOW_FILM = 1;
 
     @BindView(R.id.recycler_films)
     RecyclerView filmsRecyclerView;
@@ -122,7 +123,7 @@ public class FilmsFragment extends BaseFragment implements IItemListener, IGetCo
 
     @Override
     public void onItemSelect(Object item, int action, int position) {
-
+        notifyActivityAction(this, ACTION_SHOW_FILM, item);
     }
 
     private void showToolbarDefaultMode() {

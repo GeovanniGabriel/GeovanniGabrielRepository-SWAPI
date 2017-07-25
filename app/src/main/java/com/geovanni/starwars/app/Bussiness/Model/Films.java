@@ -7,6 +7,10 @@ import java.io.Serializable;
  */
 
 public class Films implements Serializable {
+
+    public Films() {
+    }
+
     private String edited;
 
     private String[] starships;

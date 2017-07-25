@@ -1,5 +1,6 @@
 package com.geovanni.starwars.app.Views.Activitys;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -15,20 +16,23 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.geovanni.starwars.app.Bussiness.Interfaces.IBaseFragmentListener;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IChangeFragments;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IProgressLayout;
 import com.geovanni.starwars.app.Bussiness.Interfaces.IToolbarListener;
+import com.geovanni.starwars.app.Bussiness.Model.Films;
 import com.geovanni.starwars.app.R;
 import com.geovanni.starwars.app.Views.Base.BaseActivity;
 import com.geovanni.starwars.app.Views.Base.BaseFragment;
 import com.geovanni.starwars.app.Views.CustomViews.ProgressLayout;
+import com.geovanni.starwars.app.Views.Fragments.FilmsFragment;
 import com.geovanni.starwars.app.Views.Fragments.HomeFragment;
 import com.geovanni.starwars.app.Views.Fragments.ListMenuFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends BaseActivity implements IChangeFragments, IToolbarListener, IProgressLayout {
+public class MainActivity extends BaseActivity implements IChangeFragments, IToolbarListener, IProgressLayout, IBaseFragmentListener {
 
     private ListMenuFragment mFragmentMenu;
     private String currentFragmentTag;
@@ -143,6 +147,7 @@ public class MainActivity extends BaseActivity implements IChangeFragments, IToo
             txtTitleBar.setVisibility(View.VISIBLE);
             txtTitleBar.setText(title);
         }
+        currentFragmentTag = tag;
         invalidateOptionsMenu();
     }
 
@@ -157,5 +162,19 @@ public class MainActivity extends BaseActivity implements IChangeFragments, IToo
     @Override
     public ProgressLayout getProgress() {
         return getProgressLayout();
+    }
+
+    @Override
+    public void onFragmentAction(Fragment fragment, int action, Object... params) {
+        Intent intent = new Intent();
+        if (fragment instanceof FilmsFragment) {
+            Films film = new Films();
+            if (params.length > 0) {
+                film = (Films) params[0];
+            }
+            intent.setClass(this, FilmDetailActivity.class);
+            intent.putExtra("_Film", film.getUrl());
+            startActivity(intent);
+        }
     }
 }

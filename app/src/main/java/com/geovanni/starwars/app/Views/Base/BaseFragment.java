@@ -66,60 +66,14 @@ public abstract class BaseFragment extends Fragment {
         return rootView;
     }
 
-    protected void setToolbarTitle(String title) {
-        if (toolbarListener != null) {
-            toolbarListener.updateToolbar(title, null, getCustomTag());
-        }
-    }
-
     protected void updateToolbar(String title) {
         if (toolbarListener != null) {
             toolbarListener.updateToolbar(title, null, getCustomTag());
         }
     }
 
-    protected void updateToolbar(String title, IToolbarListener.ToolbarSettings settings) {
-        if (toolbarListener != null && isActivityRunning()) {
-            toolbarListener.updateToolbar(title, settings, getCustomTag());
-        }
-    }
-
-    protected void showProgressView() {
-        if (loaderView != null) {
-            if (loaderMessageTextView != null) {
-                loaderMessageTextView.setText("");
-                loaderMessageTextView.setVisibility(View.GONE);
-            }
-            loaderView.setVisibility(View.VISIBLE);
-        }
-    }
-
-    protected void showProgressView(String text) {
-        if (loaderView != null) {
-            if (loaderMessageTextView != null) {
-                loaderMessageTextView.setText(text);
-                loaderMessageTextView.setVisibility(View.VISIBLE);
-            }
-            loaderView.setVisibility(View.VISIBLE);
-        }
-    }
-
-    protected void hideProgressView() {
-        if (loaderView != null) {
-            loaderView.setVisibility(View.GONE);
-        }
-    }
-
     public Context getCurrentContext() {
         return this.context;
-    }
-
-    protected void setCustomBackgroundResource(int resource) {
-        rootView.setBackgroundResource(resource);
-    }
-
-    public void setAction(int action, Object... params) {
-        executeAction(action, params);
     }
 
     protected void executeAction(int action, Object... params) {
